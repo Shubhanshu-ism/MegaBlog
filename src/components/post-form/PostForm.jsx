@@ -25,12 +25,12 @@ export default function PostForm({post}) {
         : null;
 
       if (file) {
-        appwriteService.deleteFile(post.featureImage); // Deletes old image if new one uploaded
+        appwriteService.deleteFile(post.featuredImage); // Deletes old image if new one uploaded
       }
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         // Ensure featureImage is updated. If file is null, it should remain undefined
-        featureImage: file ? file.$id : undefined,
+        featuredImage: file ? file.$id : undefined,
       });
       
       if (dbPost) {
@@ -40,7 +40,7 @@ export default function PostForm({post}) {
       const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id;
-        data.featureImage = fileId; // Ensure this line correctly assigns the file ID
+        data.featuredImage = fileId; // Ensure this line correctly assigns the file ID
         const dbPost = await appwriteService.createPost({
           ...data, // This 'data' object should now contain featureImage: fileId
           userId: userData.$id,
@@ -111,7 +111,7 @@ export default function PostForm({post}) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featureImage)}
+              src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />

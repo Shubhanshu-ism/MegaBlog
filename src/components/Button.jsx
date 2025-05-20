@@ -12,7 +12,6 @@ function Button({
     <button
       className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}`}
       {...props}
-      type={type}
     >
       {children}
     </button>

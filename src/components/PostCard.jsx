@@ -10,7 +10,7 @@ function PostCard({ $id, title, featureImage }) {
         <div className="w-full justify-center mb-4">
           <img
             src={appwriteService.getFilePreview(featureImage)}
-            alt="post-card-img"
+            alt={title}
             className=" rounded-xl"
           />
         </div>
