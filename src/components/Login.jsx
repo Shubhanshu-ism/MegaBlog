@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { data, Link, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { login as authLogin } from "../store/authSlice";
 import { Button, Input, Logo } from "./index";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm("");
+  const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
 
   const login = async (data) => {
@@ -17,7 +17,7 @@ function Login() {
       const session = await authService.login(data);
       if (session) {
         const userData = await authService.getCurrentUser();
-        if (userData) dispatch(authLogin);
+        if (userData) dispatch(authLogin({userData}));
         navigate("/");
       }
     } catch (error) {
@@ -54,7 +54,7 @@ function Login() {
               label="Email: "
               placeholder="Enter your email"
               type="email"
-              {...register(email, {
+              {...register("email", {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
@@ -68,7 +68,7 @@ function Login() {
               label="password: "
               placeholder="Enter your Password"
               type="password"
-              {...register(password, {
+              {...register("password", {
                 required: true,
               })}
             />

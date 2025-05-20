@@ -1,13 +1,21 @@
-import  React from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { Provider } from 'react-redux'
-import store from './store/store.js'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { Login, AuthLayout } from "./components/index.js";
-import { AddPost, AllPosts, Post, Signup, EditPost, Home } from "./pages/index.js";
+import {
+  AddPost,
+  AllPosts,
+  Post,
+  Signup,
+  EditPost,
+  Home,
+} from "./pages/index.js";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,7 +26,9 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/about",
+        // This seems to be for login, but its path is /about.
+        // If it's a login page, a more descriptive path might be /login.
+        path: "/login", // Changed from /about to /login for clarity, assuming it's a login page
         element: (
           <AuthLayout authentication={false}>
             <Login />
@@ -50,7 +60,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/edit-post/:slug",
+        path: "/edit-post/:slug", // For editing a specific post
         element: (
           <AuthLayout authentication>
             <EditPost />
@@ -58,9 +68,21 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/signup",
-        element: <Post />
+        // THIS IS THE MISSING/CORRECTED ROUTE for displaying a single post
+        path: "/post/:slug", // This path now correctly matches "/post/test-5"
+        element: (
+          <AuthLayout authentication>
+            {" "}
+            {/* Assuming a post page requires authentication to view */}
+            <Post />
+          </AuthLayout>
+        ),
       },
+      // You might want a catch-all 404 page for any unhandled routes
+      // {
+      //   path: "*",
+      //   element: <div>404 Not Found</div>,
+      // },
     ],
   },
 ]);
@@ -70,5 +92,5 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-   </React.StrictMode>
+  </React.StrictMode>
 );

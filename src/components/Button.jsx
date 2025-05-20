@@ -11,7 +11,7 @@ function Button({
   return (
     <button
       className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}`}
-      ${...props}
+      {...props}
       type={type}
     >
       {children}

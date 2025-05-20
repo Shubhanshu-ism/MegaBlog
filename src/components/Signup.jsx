@@ -15,10 +15,10 @@ function Signup() {
   const create = async (data) => {
     setError("");
     try {
-      const userData = await authService.createAccount(data);
-      if (userData) {
-        const userData = await authService.getCurrentUser();
-        if (userData) dispatch(login(userData));
+      const userAccount = await authService.createAccount(data);
+      if (userAccount) {
+        const currentUserData = await authService.getCurrentUser();
+        if (currentUserData) dispatch(login({ userData: currentUserData })); // Corrected: wrapped userData in an object
         navigate("/");
       }
     } catch (error) {
@@ -53,7 +53,7 @@ function Signup() {
             <Input
               label="Full Name: "
               placeholder="Enter your full name"
-              type="email"
+              type="text"
               {...register("name", {
                 required: true,
               })}
@@ -62,7 +62,7 @@ function Signup() {
               label="Email: "
               placeholder="Enter your email"
               type="email"
-              {...register(email, {
+              {...register("email", {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
