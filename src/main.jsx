@@ -6,15 +6,17 @@ import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Login, AuthLayout } from "./components/index.js";
+// Import components and pages
+import { AuthLayout } from "./components/index.js"; // Assuming index.js is in components/
+import LoginPage from "./pages/Login.jsx"; // Renamed to avoid conflict with component
+import SignupPage from "./pages/Signup.jsx"; // Renamed
 import {
   AddPost,
   AllPosts,
-  Post,
-  Signup,
+  Post, // This is pages/Post.jsx
   EditPost,
   Home,
-} from "./pages/index.js";
+} from "./pages/index.js"; // Assuming index.js is in pages/
 
 const router = createBrowserRouter([
   {
@@ -26,12 +28,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        // This seems to be for login, but its path is /about.
-        // If it's a login page, a more descriptive path might be /login.
-        path: "/login", // Changed from /about to /login for clarity, assuming it's a login page
+        path: "/login",
         element: (
           <AuthLayout authentication={false}>
-            <Login />
+            <LoginPage />
           </AuthLayout>
         ),
       },
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "/signup",
         element: (
           <AuthLayout authentication={false}>
-            <Signup />
+            <SignupPage />
           </AuthLayout>
         ),
       },
@@ -47,6 +47,8 @@ const router = createBrowserRouter([
         path: "/all-posts",
         element: (
           <AuthLayout authentication>
+            {" "}
+            {/* Requires login */}
             <AllPosts />
           </AuthLayout>
         ),
@@ -55,31 +57,31 @@ const router = createBrowserRouter([
         path: "/add-post",
         element: (
           <AuthLayout authentication>
+            {" "}
+            {/* Requires login */}
             <AddPost />
           </AuthLayout>
         ),
       },
       {
-        path: "/edit-post/:slug", // For editing a specific post
+        path: "/edit-post/:slug", // slug is the document ID
         element: (
           <AuthLayout authentication>
+            {" "}
+            {/* Requires login */}
             <EditPost />
           </AuthLayout>
         ),
       },
       {
-        // THIS IS THE MISSING/CORRECTED ROUTE for displaying a single post
-        path: "/post/:slug", // This path now correctly matches "/post/test-5"
-        element: (
-          <AuthLayout authentication>
-            <Post />
-           </AuthLayout>
-        ),
+        path: "/post/:slug", // slug is the document ID
+        element: <Post />, // Individual posts are often public, so AuthLayout might not be needed
+        // If posts require login to view, wrap with <AuthLayout authentication>
       },
-      // You might want a catch-all 404 page for any unhandled routes
+      // Consider adding a 404 Not Found page
       // {
       //   path: "*",
-      //   element: <div>404 Not Found</div>,
+      //   element: <div><h1>404 - Page Not Found</h1><Link to="/">Go Home</Link></div>,
       // },
     ],
   },
