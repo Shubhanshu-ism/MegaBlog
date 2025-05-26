@@ -116,7 +116,7 @@ export default function Post() {
     <div className="py-8 bg-gray-100">
       <Container>
         {post.featuredImage && (
-          <div className="w-full flex justify-center mb-6 relative border rounded-xl p-2 bg-white shadow-md">
+          <div className="w-full flex justify-center mb-6 relative  rounded-xl p-2 bg-white shadow-md">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
@@ -125,20 +125,25 @@ export default function Post() {
           </div>
         )}
 
-        <div className="w-full mb-6 p-4 bg-white rounded-xl shadow-md">
-          <div className="flex justify-between items-start">
-            <h1 className="text-3xl font-bold text-gray-800">{post.title}</h1>
+        <div className="w-full mb-6 p-4 bg-white rounded-xl shadow-md item-center">
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl w-full font-bold text-gray-800 text-center">
+              {post.title}
+            </h1>
             {isAuthor && (
-              <div className="flex space-x-3">
+              <div className="flex space-x-3 item-center">
                 <Link to={`/edit-post/${post.$id}`}>
-                  <Button bgColor="bg-green-500" className="hover:bg-green-600">
+                  <Button
+                    bgColor="bg-green-500"
+                    className="shadow-md hover:bg-green-600"
+                  >
                     Edit
                   </Button>
                 </Link>
                 <Button
                   bgColor="bg-red-500"
                   onClick={deletePostHandler}
-                  className="hover:bg-red-600"
+                  className="shadow-md hover:bg-red-600"
                 >
                   Delete
                 </Button>
@@ -147,7 +152,7 @@ export default function Post() {
           </div>
         </div>
 
-        <div className="browser-css p-6 bg-white rounded-xl shadow-md text-gray-700 leading-relaxed">
+        <div className="browser-css p-6 bg-white rounded-xl shadow-md text-gray-700 items-center">
           {/* Ensure post.content is a string and parse it */}
           {parse(String(post.content || ""))}
         </div>
