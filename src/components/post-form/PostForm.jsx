@@ -20,38 +20,71 @@ export default function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
-    if (post) {
-      const file = data.image[0]
-        ? await appwriteService.uploadFile(data.image[0])
-        : null;
+    try {
+      if (post) {
+        // UPDATING AN EXISTING POST
+        let file = null;
 
-      if (file) {
-        appwriteService.deleteFile(post.featuredImage);
-      }
+        // Only upload new file if user selected one
+        if (data.image && data.image[0]) {
+          file = await appwriteService.uploadFile(data.image[0]);
+        }
 
-      const dbPost = await appwriteService.updatePost(post.$id, {
-        ...data,
-        featuredImage: file ? file.$id : undefined,
-      });
+        // Prepare update data
+        const updateData = {
+          title: data.title,
+          content: data.content,
+          status: data.status,
+          slug: data.slug,
+        };
 
-      if (dbPost) {
-        navigate(`/post/${dbPost.$id}`);
-      }
-    } else {
-      const file = await appwriteService.uploadFile(data.image[0]);
+        // Only add featuredImage if we have a new file
+        if (file) {
+          updateData.featuredImage = file.$id;
 
-      if (file) {
-        const fileId = file.$id;
-        data.featuredImage = fileId;
-        const dbPost = await appwriteService.createPost({
-          ...data,
-          userId: userData.$id,
-        });
+          // Delete old file ONLY if it exists and we have a new file
+          if (post.featuredImage && post.featuredImage !== file.$id) {
+            try {
+              await appwriteService.deleteFile(post.featuredImage);
+            } catch (error) {
+              console.warn("Could not delete old file:", error.message);
+              // Don't fail the entire operation if old file deletion fails
+            }
+          }
+        }
+
+        const dbPost = await appwriteService.updatePost(post.$id, updateData);
 
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
+      } else {
+        // CREATING A NEW POST
+        if (!data.image || !data.image[0]) {
+          alert("Please select an image for the post");
+          return;
+        }
+
+        const file = await appwriteService.uploadFile(data.image[0]);
+
+        if (file) {
+          const dbPost = await appwriteService.createPost({
+            title: data.title,
+            content: data.content,
+            status: data.status,
+            slug: data.slug,
+            featuredImage: file.$id,
+            userId: userData.$id,
+          });
+
+          if (dbPost) {
+            navigate(`/post/${dbPost.$id}`);
+          }
+        }
       }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+      alert(`Error: ${error.message}`);
     }
   };
 
@@ -90,10 +123,14 @@ export default function PostForm({ post }) {
           placeholder="Slug"
           className="mb-4"
           {...register("slug", { required: true })}
+          readOnly={!!post} // Add this line
           onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
+            if(!post){
+              setValue("slug", slugTransform(e.currentTarget.value), {
+                shouldValidate: true,
+              });
+            }
+            
           }}
         />
         <RTE
@@ -111,7 +148,7 @@ export default function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
-        {post && (
+        {post && post.featuredImage && (
           <div className="w-full mb-4">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}

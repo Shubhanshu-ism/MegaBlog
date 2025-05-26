@@ -47,7 +47,6 @@ const router = createBrowserRouter([
         path: "/all-posts",
         element: (
           <AuthLayout authentication>
-            {" "}
             <AllPosts />
           </AuthLayout>
         ),
@@ -56,7 +55,6 @@ const router = createBrowserRouter([
         path: "/add-post",
         element: (
           <AuthLayout authentication>
-            {" "}
             <AddPost />
           </AuthLayout>
         ),
@@ -65,7 +63,6 @@ const router = createBrowserRouter([
         path: "/edit-post/:slug", // For editing a specific post
         element: (
           <AuthLayout authentication>
-            {" "}
             <EditPost />
           </AuthLayout>
         ),
@@ -74,11 +71,9 @@ const router = createBrowserRouter([
         // THIS IS THE MISSING/CORRECTED ROUTE for displaying a single post
         path: "/post/:slug", // This path now correctly matches "/post/test-5"
         element: (
-          // <AuthLayout authentication>
-            // {" "}
-            // {/* Assuming a post page requires authentication to view */}
+          <AuthLayout authentication>
             <Post />
-          // </AuthLayout>
+           </AuthLayout>
         ),
       },
       // You might want a catch-all 404 page for any unhandled routes

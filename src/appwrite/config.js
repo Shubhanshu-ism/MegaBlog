@@ -30,7 +30,7 @@ export class Service {
       );
     } catch (error) {
       console.log("Appwrite service :: createPost :: error", error);
-      return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
   async updatePost(slug, { title, content, featuredImage, status }) {
@@ -48,7 +48,8 @@ export class Service {
       );
     } catch (error) {
       console.log("Appwrite service :: updatePost :: error", error);
-      return false;
+      // return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
   async deletePost(slug) {
@@ -61,7 +62,8 @@ export class Service {
       return true;
     } catch (error) {
       console.log("Appwrite service :: deletePost :: error", error);
-      return false;
+      // return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
   async getPost(slug) {
@@ -73,7 +75,8 @@ export class Service {
       );
     } catch (error) {
       console.log("Appwrite service :: getPost :: error", error);
-      return false;
+      // return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
   async getPosts(queries = [Query.equal("status", "active")]) {
@@ -85,7 +88,8 @@ export class Service {
       );
     } catch (error) {
       console.log("Appwrite service :: getPosts :: error", error);
-      return false;
+      // return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
 
@@ -99,20 +103,26 @@ export class Service {
       );
     } catch (error) {
       console.log("Appwrite service :: uploadfile :: error", error);
-      return false;
+      // return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
   async deleteFile(fileId) {
     try {
-      await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
+      await this.bucket.deleteFile(
+        conf.appwriteBucketId, 
+        fileId
+      );
       return true;
     } catch (error) {
       console.log("Appwrite service :: deleteFile :: error", error);
-      return false;
+      // return false;
+      return { error: true, message: error.message, originalError: error };
     }
   }
-  getFilePreview(fileId) {
-    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+   getFilePreview(fileId) {
+    return  this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+    
   }
 }
 
