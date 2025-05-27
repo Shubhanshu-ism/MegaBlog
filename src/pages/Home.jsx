@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import appwriteService from "../appwrite/config";
-import { Container, PostCard } from "../components";
+import { Button, Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -20,12 +21,40 @@ function Home() {
       });
     }
   }, [userData]);
-
-  if (posts.length === 0) {
+  const navigate = useNavigate();
+  if (!userData){
     return (
-      <Loading/>
+      <div className="w-full p-8">
+        <h1 className="text-2xl p-5 font-bold bg-gray-100 rounded-xl">
+          Please Log in to continue
+        </h1>
+        <div className=" flex flex-wrap justify-center font-bold ">
+          <div className=" p-4 m-5 ">
+            <p>Don't have an account?</p>
+            <button
+              className="inline-block px-6 py-2 m-4 duration-200 bg-gray-200 hover:bg-blue-100 rounded-2xl "
+              onClick={() => navigate("/signup")}
+            >
+              Signup
+            </button>
+          </div>
+
+          <div className=" p-4 m-5">
+            <p>If you already have an account</p>
+            <button
+              className="inline-block px-6 py-2 m-4 duration-200 bg-gray-200 hover:bg-blue-100 rounded-2xl "
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
+    if (posts.length === 0) {
+      return <Loading />;
+    }
   return (
     <div className="w-full py-8">
       <Container>
