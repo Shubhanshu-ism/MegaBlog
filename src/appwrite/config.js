@@ -110,7 +110,7 @@ export class Service {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        [Query.and([queries, Query.equal("status", "active")])]
+        [queries]
       );
     } catch (error) {
       console.log("Appwrite service :: getPosts :: error", error);
