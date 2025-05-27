@@ -9,7 +9,7 @@ function AllPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await appwriteService.getPosts([]);
+        const response = await appwriteService.getPosts();
         if (response) {
           setPosts(response.documents);
         }
@@ -53,8 +53,6 @@ function AllPosts() {
               key={post.$id}
               className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
             >
-              {" "}
-              {/* Added responsive widths */}
               <PostCard {...post} />
             </div>
           ))}

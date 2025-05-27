@@ -2,10 +2,12 @@ import conf from "../conf/conf";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
-  client = new Client();
+  client = null;
   account = null;
 
   constructor() {
+
+    this.client = new Client();
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
@@ -21,7 +23,7 @@ export class AuthService {
         name
       );
       if (userAccount) {
-        // call another method
+        // call another method ie login 
         return this.login({ email, password });
       }
       return userAccount;

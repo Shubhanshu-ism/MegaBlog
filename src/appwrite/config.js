@@ -1,12 +1,14 @@
 import { Client, Storage, Databases, Query, ID } from "appwrite";
 import conf from "../conf/conf";
+import { useSelector } from "react-redux";
 
 export class Service {
-  client = new Client();
+  client;
   databases;
   bucket;
 
   constructor() {
+    this.client = new Client();
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
@@ -101,7 +103,20 @@ export class Service {
       return false;
     }
   }
-
+  async getMyPosts(id) {
+   
+    const queries = Query.equal("userId", String(id));
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        [Query.and([queries, Query.equal("status", "active")])]
+      );
+    } catch (error) {
+      console.log("Appwrite service :: getPosts :: error", error);
+      return false;
+    }
+  }
   // file upload services
   async uploadFile(file) {
     try {
