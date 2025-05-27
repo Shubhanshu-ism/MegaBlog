@@ -27,8 +27,10 @@ export default function AddPost() {
   }, []);
 
   return (
-    <div className='py-8'>
+    <div className="py-8 duration-200">
       <Container>
+        {/* <PostFormSkeleton /> */}
+        {/* <PostForm /> */}
         {loading ? (
           <PostFormSkeleton />
         ) : (
