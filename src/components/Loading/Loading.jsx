@@ -1,5 +1,5 @@
 import React from "react";
-import { ShimmerPosr } from "./ShimmerPost"; // Assuming this is an array of dummy post data
+import { ShimmerPost } from "./ShimmerPost"; // Assuming this is an array of dummy post data
 import Header from "../Header/Header"; // Assuming you want to include these in the loading state
 import Footer from "../Footer/Footer"; // Assuming you want to include these in the loading state
 import Container from "../container/Container";
@@ -18,7 +18,7 @@ function Loading() {
           <div className="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {" "}
             {/* Using CSS Grid for better responsiveness */}
-            {ShimmerPosr.map((post) => (
+            {ShimmerPost.map((post) => (
               <div key={post.id} className="w-full">
                 <div className="bg-white rounded-xl p-4 shadow-lg animate-pulse h-full flex flex-col">
                   {/* Image Shimmer */}
@@ -37,7 +37,7 @@ function Loading() {
         </Container>
       </main>
       {/* You might want to include a skeleton Footer here if your actual footer has a loading state */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
