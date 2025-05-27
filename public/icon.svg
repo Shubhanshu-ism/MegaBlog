@@ -1,33 +1,7 @@
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#808080;stop-opacity:1" /> <stop offset="100%" style="stop-color:#A9A9A9;stop-opacity:1" /> </linearGradient>
-    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6A82FB;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FC5C7D;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-
-  <g transform="translate(100, 80)">
-    <circle cx="0" cy="0" r="60" fill="url(#gradient)" stroke="#333" stroke-width="2"/>
-
-    <path d="M -40 -60 Q -50 -80 -60 -60 L -45 -45 Z" fill="url(#gradient)" stroke="#333" stroke-width="2"/>
-    <path d="M 40 -60 Q 50 -80 60 -60 L 45 -45 Z" fill="url(#gradient)" stroke="#333" stroke-width="2"/>
-    <circle cx="-50" cy="-55" r="5" fill="#333"/>
-    <circle cx="50" cy="-55" r="5" fill="#333"/>
-
-    <circle cx="0" cy="20" r="30" fill="#FFF" stroke="#333" stroke-width="2"/>
-
-    <path d="M -10 10 L 10 10 L 0 25 Z" fill="#333"/>
-
-    <circle cx="-25" cy="-10" r="8" fill="#333"/>
-    <circle cx="25" cy="-10" r="8" fill="#333"/>
-    <circle cx="-25" cy="-10" r="3" fill="#FFF"/>
-    <circle cx="25" cy="-10" r="3" fill="#FFF"/>
-
-    <path d="M -45 -40 Q -50 -20 -40 0" stroke="#333" stroke-width="3" stroke-linecap="round"/>
-    <path d="M -30 -50 Q -35 -30 -30 -10" stroke="#333" stroke-width="3" stroke-linecap="round"/>
-    <path d="M 45 -40 Q 50 -20 40 0" stroke="#333" stroke-width="3" stroke-linecap="round"/>
-    <path d="M 30 -50 Q 35 -30 30 -10" stroke="#333" stroke-width="3" stroke-linecap="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+  <path d="M14 9.5H8a1.5 1.5 0 0 0 0 3h6a1.5 1.5 0 0 0 0-3z"/>
+  <path d="M60 3.5H4A3.5 3.5 0 0 0 .5 7v50A3.5 3.5 0 0 0 4 60.5h56a3.5 3.5 0 0 0 3.5-3.5V7A3.5 3.5 0 0 0 60 3.5zM3.5 7a.5.5 0 0 1 .5-.5h56a.5.5 0 0 1 .5.5v8.5h-57zm57 50a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V18.5h57z"/>
+  <path d="M56 29.5H44a1.5 1.5 0 0 0 0 3h12a1.5 1.5 0 0 0 0-3zM56 36.5H44a1.5 1.5 0 0 0 0 3h12a1.5 1.5 0 0 0 0-3zM56 50.5H44a1.5 1.5 0 0 0 0 3h12a1.5 1.5 0 0 0 0-3zM8 25.5h48a1.5 1.5 0 0 0 0-3H8a1.5 1.5 0 0 0 0 3zM56 43.5H44a1.5 1.5 0 0 0 0 3h12a1.5 1.5 0 0 0 0-3z"/>
+  <path d="M38 40.5a37.769 37.769 0 0 0-29.309 14H38a1.5 1.5 0 0 0 1.5-1.5V40.5z" style="fill:#3e3ef4"/>
+  <path d="M38 29.5H8A1.5 1.5 0 0 0 6.5 31v21.445C6.792 52.223 17.72 37.5 38 37.5h1.5V31a1.5 1.5 0 0 0-1.5-1.5zM12 37a2 2 0 1 1 2-2 2 2 0 0 1-2 2z" style="fill:#3e3ef4"/>
 </svg>

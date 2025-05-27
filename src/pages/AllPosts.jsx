@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, PostCard } from "../components";
 import appwriteService from "../appwrite/config";
+import Loading from "../components/Loading/Loading";
 
 function AllPosts() {
   const [posts, setPosts] = useState([]);
@@ -26,11 +27,7 @@ function AllPosts() {
 
   if (loading) {
     return (
-      <div className="w-full py-8 text-center">
-        <Container>
-          <p>Loading posts...</p>
-        </Container>
-      </div>
+      <Loading/>
     );
   }
 
