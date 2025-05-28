@@ -4,6 +4,7 @@ import appwriteService from "../appwrite/config";
 import { Button, Container } from "../components"; // Assuming components/index.js
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import PostSkeleton from "../components/PostSkeleton";
 
 export default function Post() {
   const [post, setPost] = useState(null);
@@ -75,15 +76,16 @@ export default function Post() {
         setError(`Error deleting post: ${err.message}`);
       });
   };
-
+  // return <PostSkeleton />;
   if (loading) {
-    return (
-      <div className="py-8">
-        <Container>
-          <p className="text-center text-xl">Loading post...</p>
-        </Container>
-      </div>
-    );
+    // return (
+    //   <div className="py-8">
+    //     <Container>
+    //       <p className="text-center text-xl">Loading post...</p>
+    //     </Container>
+    //   </div>
+    // );
+    return <PostSkeleton />;
   }
 
   if (error) {
@@ -113,10 +115,29 @@ export default function Post() {
   }
 
   return (
-    <div className="py-8 bg-gray-100">
+    <div className="py-8 bg-zinc-400 shadow-lg shadow-gray-600 rounded-2xl m-4">
       <Container>
+        {isAuthor && (
+          <div className="flex justify-end space-x-3 item-center m-4">
+            <Link to={`/edit-post/${post.$id}`}>
+              <Button
+                bgColor="bg-green-500"
+                className="shadow-gray-600 shadow-lg hover:shadow-md hover:bg-green-600"
+              >
+                Edit
+              </Button>
+            </Link>
+            <Button
+              bgColor="bg-red-500"
+              onClick={deletePostHandler}
+              className="shadow-gray-600 shadow-lg hover:shadow-md hover:bg-red-600"
+            >
+              Delete
+            </Button>
+          </div>
+        )}
         {post.featuredImage && (
-          <div className="w-full flex justify-center mb-6 relative  rounded-xl p-2 bg-white shadow-md">
+          <div className="w-full flex justify-center mb-6 relative  rounded-xl p-2 bg-white shadow-gray-600 shadow-lg">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
@@ -125,34 +146,15 @@ export default function Post() {
           </div>
         )}
 
-        <div className="w-full mb-6 p-4 bg-white rounded-xl shadow-md item-center">
+        <div className="w-full mb-6 p-4 bg-white rounded-xl shadow-gray-600 shadow-lg item-center">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl w-full font-bold text-gray-800 text-center">
               {post.title}
             </h1>
-            {isAuthor && (
-              <div className="flex space-x-3 item-center">
-                <Link to={`/edit-post/${post.$id}`}>
-                  <Button
-                    bgColor="bg-green-500"
-                    className="shadow-md hover:bg-green-600"
-                  >
-                    Edit
-                  </Button>
-                </Link>
-                <Button
-                  bgColor="bg-red-500"
-                  onClick={deletePostHandler}
-                  className="shadow-md hover:bg-red-600"
-                >
-                  Delete
-                </Button>
-              </div>
-            )}
           </div>
         </div>
 
-        <div className="browser-css p-6 bg-white rounded-xl shadow-md text-gray-700 items-center">
+        <div className="browser-css p-6 bg-white rounded-xl shadow-gray-600 shadow-lg text-gray-700 items-center">
           {/* Ensure post.content is a string and parse it */}
           {parse(String(post.content || ""))}
         </div>

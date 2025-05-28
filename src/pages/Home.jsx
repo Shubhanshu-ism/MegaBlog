@@ -24,15 +24,15 @@ function Home() {
   const navigate = useNavigate();
   if (!userData){
     return (
-      <div className="w-full p-8">
-        <h1 className="text-2xl p-5 font-bold bg-gray-100 rounded-xl">
+      <div className="w-full p-8 ">
+        <h1 className="text-2xl p-5 font-bold bg-gray-100 shadow-2xl rounded-xl shadow-gray-600">
           Please Log in to continue
         </h1>
         <div className=" flex flex-wrap justify-center font-bold ">
           <div className=" p-4 m-5 ">
             <p>Don't have an account?</p>
             <button
-              className="inline-block px-6 py-2 m-4 cursor-pointer duration-200 bg-gray-200 hover:bg-blue-100 rounded-2xl "
+              className="inline-block px-6 py-2 m-4 cursor-pointer shadow-lg hover:shadow-md shadow-gray-600 duration-200 bg-gray-200 hover:bg-blue-100 rounded-2xl "
               onClick={() => navigate("/signup")}
             >
               Signup
@@ -42,7 +42,7 @@ function Home() {
           <div className=" p-4 m-5">
             <p>If you already have an account</p>
             <button
-              className="inline-block px-6 py-2 m-4 cursor-pointer duration-200 bg-gray-200 hover:bg-blue-100 rounded-2xl "
+              className="inline-block px-6 py-2 m-4 cursor-pointer shadow-lg shadow-gray-600 hover:shadow-md duration-200 bg-gray-200 hover:bg-blue-100 rounded-2xl "
               onClick={() => navigate("/login")}
             >
               Login

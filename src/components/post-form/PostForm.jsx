@@ -32,7 +32,9 @@ export default function PostForm({ post }) {
           if (uploadedFile) {
             newFileId = uploadedFile.$id;
           } else {
-            setFormError("Failed to upload new image. Please try again.");
+            setFormError(
+              "Failed to upload new image. Please try again/Disable extention/Clear your browser's cache before Update"
+            );
             return; // Stop submission if new image upload fails
           }
         }
@@ -64,7 +66,9 @@ export default function PostForm({ post }) {
           }
           navigate(`/post/${dbPost.$id}`);
         } else {
-          setFormError("Failed to update post. Please try again.");
+          setFormError(
+            "Failed to update post. Please try again/Disable extention/Clear your browser's cache before Update"
+          );
           // If update failed but a new file was uploaded, it might be orphaned.
           // Consider deleting newFileId if dbPost update fails.
           if (newFileId) {
@@ -144,21 +148,21 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue, post]); // 'post' ensures this effect re-evaluates if 'post' prop changes
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-full md:w-2/3 px-2">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap ">
+      <div className="w-full md:w-2/3 px-2 ">
         {formError && (
-          <p className="text-red-600 mt-2 mb-4 text-center">{formError}</p>
+          <p className="text-red-600 mt-2 mb-4 text-center ">{formError}</p>
         )}
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4"
+          className="mb-4 shadow-lg shadow-gray-600 rounded-xl focus:shadow-md"
           {...register("title", { required: "Title is required" })}
         />
         <Input
           label="Slug (URL Identifier) :"
           placeholder="Slug will be auto-generated from title for new posts"
-          className="mb-4"
+          className="mb-4 shadow-lg shadow-gray-600 rounded-xl focus:shadow-md"
           {...register("slug", { required: "Slug is required" })}
           readOnly={!!post} // Slug is the document ID, cannot be changed for existing posts
           onInput={(e) => {
@@ -175,13 +179,14 @@ export default function PostForm({ post }) {
           name="content"
           control={control}
           defaultValue={getValues("content")}
+          
         />
       </div>
-      <div className="w-full md:w-1/3 px-2 mt-4 md:mt-0">
+      <div className="w-full md:w-1/3 px-2 mt-4 md:mt-0 ">
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4"
+          className="mb-4 shadow-lg shadow-gray-600 rounded-xl focus:shadow-md"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", {
             required: !post
@@ -190,25 +195,25 @@ export default function PostForm({ post }) {
           })}
         />
         {post && post.featuredImage && (
-          <div className="w-full mb-4">
+          <div className="w-full mb-4 ">
             <p className="text-sm mb-1">Current Image:</p>
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
-              className="rounded-lg max-h-40 object-contain"
+              className=" max-h-40 object-contain shadow-gray-600 rounded-xl focus:shadow-md"
             />
           </div>
         )}
         <Select
           options={["active", "inactive"]}
           label="Status"
-          className="mb-4"
+          className="mb-4 shadow-lg shadow-gray-600 rounded-xl focus:shadow-md"
           {...register("status", { required: "Status is required" })}
         />
         <Button
           type="submit"
           bgColor={post ? "bg-green-500" : "bg-blue-600"} // Adjusted colors
-          className="w-full hover:bg-green-600 active:bg-green-700" // Example hover/active
+          className="w-full hover:bg-green-600 active:bg-green-700 shadow-lg shadow-gray-600 rounded-xl hover:shadow-md duration-200" // Example hover/active
         >
           {post ? "Update Post" : "Create Post"}
         </Button>

@@ -25,6 +25,7 @@ function AllPosts() {
     fetchPosts(); // Call the async function
   }, []); // Empty dependency array means this effect runs only once after the initial render
 
+  // return <Loading />;
   if (loading) {
     return (
       <Loading/>
@@ -33,7 +34,7 @@ function AllPosts() {
 
   if (posts.length === 0 && !loading) {
     return (
-      <div className="w-full py-8 text-center">
+      <div className="w-full py-8 text-center duration-200">
         <Container>
           <p>No posts available.</p>
         </Container>
@@ -42,9 +43,9 @@ function AllPosts() {
   }
 
   return (
-    <div className="w-full py-8">
+    <div className="w-full py-8 ">
       <Container>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap ">
           {posts.map((post) => (
             <div
               key={post.$id}

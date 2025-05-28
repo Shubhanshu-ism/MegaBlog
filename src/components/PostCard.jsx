@@ -2,7 +2,7 @@ import React from "react";
 import appwriteService from "../appwrite/config"; // Correct path assuming PostCard.jsx is in components/
 import { Link } from "react-router-dom";
 
-function PostCard({ $id, title, featuredImage }) {
+function PostCard({ $id, title, featuredImage, status = "active" }) {
   // $id is the document ID (slug)
   const imageUrl = featuredImage
     ? appwriteService.getFilePreview(featuredImage)
@@ -10,7 +10,11 @@ function PostCard({ $id, title, featuredImage }) {
 
   return (
     <Link to={`/post/${$id}`}>
-      <div className="w-full bg-gray-100 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-200 h-full flex flex-col items-center ">
+      <div
+        className={`w-full ${
+          status === "active" ? "bg-white" : "bg-neutral-400"
+        }  rounded-xl p-4 shadow-lg shadow-gray-600 hover:shadow-md transition-shadow duration-200 h-full flex flex-col items-center`}
+      >
         {imageUrl && (
           <div className="w-full justify-center mb-4 h-40 overflow-hidden rounded-md">
             <img
@@ -28,6 +32,7 @@ function PostCard({ $id, title, featuredImage }) {
         <h2 className="text-xl items-center font-bold text-gray-800 mt-auto">
           {title}
         </h2>
+        {/* <p className="text-sm mt-1">{status}</p> */}
       </div>
     </Link>
   );

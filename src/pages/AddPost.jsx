@@ -30,12 +30,9 @@ export default function AddPost() {
     <div className="py-8 duration-200">
       <Container>
         {/* <PostFormSkeleton /> */}
+        {/* <PostFormSkeleton /> */}
         {/* <PostForm /> */}
-        {loading ? (
-          <PostFormSkeleton />
-        ) : (
-          <PostForm />
-        )}
+        {loading ? <PostFormSkeleton /> : <PostForm />}
       </Container>
     </div>
   );
