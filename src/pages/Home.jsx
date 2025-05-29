@@ -24,7 +24,7 @@ function Home() {
   const navigate = useNavigate();
   if (!userData){
     return (
-      <div className="w-full p-8 ">
+      <div className="w-full p-8  space-y-8">
         <h1 className="text-2xl p-5 font-bold bg-gray-100 shadow-2xl rounded-xl shadow-gray-600">
           Please Log in to continue
         </h1>

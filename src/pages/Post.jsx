@@ -154,7 +154,7 @@ export default function Post() {
           </div>
         </div>
 
-        <div className="browser-css p-6 bg-white rounded-xl shadow-gray-600 shadow-lg text-gray-700 items-center">
+        <div className="browser-css  p-6 pl-10 bg-white rounded-xl shadow-gray-600 shadow-lg text-gray-700 text-justify  items-center">
           {/* Ensure post.content is a string and parse it */}
           {parse(String(post.content || ""))}
         </div>

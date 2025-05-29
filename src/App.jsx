@@ -21,7 +21,7 @@ function App() {
           dispatch(logout());
         }
       })
-
+      .catch((error)=> console.log(error))
       .finally(() => setLoading(false));
   }, [dispatch]);
   return (
@@ -29,13 +29,13 @@ function App() {
       <div className="w-full block">
         <Header />
         <main>
-          {!loading ? <Outlet /> :  <Loading/>}
-          {/* todo */}
+          {/* <Outlet /> */}
+          {!loading ? <Outlet /> : <Loading />}
         </main>
-        <Footer /> 
+        <Footer />
       </div>
     </div>
-  )
+  );
 }
 
 export default App;

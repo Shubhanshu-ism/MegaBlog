@@ -148,7 +148,7 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue, post]); // 'post' ensures this effect re-evaluates if 'post' prop changes
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap ">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap mt-3.5">
       <div className="w-full md:w-2/3 px-2 ">
         {formError && (
           <p className="text-red-600 mt-2 mb-4 text-center ">{formError}</p>
