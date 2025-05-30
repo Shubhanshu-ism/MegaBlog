@@ -24,13 +24,14 @@ function App() {
       .catch((error)=> console.log(error))
       .finally(() => setLoading(false));
   }, [dispatch]);
+  if(loading) return <Loading/>;
   return (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400 duration-200">
       <div className="w-full block">
         <Header />
         <main>
-          {/* <Outlet /> */}
-          {!loading ? <Outlet /> : <Loading />}
+          <Outlet />
+          {/* {!loading ? <Outlet /> : <Loading />} */}
         </main>
         <Footer />
       </div>

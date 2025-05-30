@@ -15,6 +15,7 @@ function PostCard({ $id, title, featuredImage, status = "active" }) {
           status === "active" ? "bg-white" : "bg-neutral-400"
         }  rounded-xl p-4 shadow-lg shadow-gray-600 hover:shadow-md transition-shadow duration-200 h-full flex flex-col items-center`}
       >
+        {status !== "active" && <p className="m-1 font-bold">Inactive</p> } 
         {imageUrl && (
           <div className="w-full justify-center mb-4 h-40 overflow-hidden rounded-md">
             <img

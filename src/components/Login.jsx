@@ -5,10 +5,11 @@ import { Button, Input, Logo } from "./index";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
+
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState:{isSubmitting} } = useForm();
   const [error, setError] = useState("");
 
   const login = async (data) => {
@@ -47,7 +48,9 @@ function Login() {
             Sign Up
           </Link>
         </p>
+
         {error && <p className="text-red-500 text-center">{error} </p>}
+        
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
             <Input
@@ -58,9 +61,8 @@ function Login() {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                      value
-                    ) || "Email address must be a valid address",
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) 
+                  || "Email address must be a valid address",
                 },
               })}
             />
@@ -72,7 +74,7 @@ function Login() {
                 required: true,
               })}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" diabled={isSubmitting}>
               Sign in
             </Button>
           </div>

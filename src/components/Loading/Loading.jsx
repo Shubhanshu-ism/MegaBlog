@@ -4,7 +4,7 @@ import Container from "../container/Container";
 
 function Loading() {
   return (
-    <div className="w-full py-3 m-3  ">
+    <div className="w-full py-3 m-1  ">
       <main className="flex flex-wrap ">
         <Container>
           <div className="py-8  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
