@@ -52,6 +52,7 @@ function Home() {
       </div>
     );
   }
+  
     if (posts.length === 0) {
       return <Loading />;
     }
